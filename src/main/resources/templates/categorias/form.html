@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+
+    <title>Cadastrar Categoria</title>
+</head>
+<body>
+
+<nav>
+    <a class="botao secundario" th:href="@{/livros}">Livros</a>
+    <a class="botao" th:href="@{/livros/novo}">Cadastrar Livro</a>
+    <a class="botao secundario" th:href="@{/autores}">Autores</a>
+    <a class="botao" th:href="@{/autores/novo}">Cadastrar Autor</a>
+    <a class="botao secundario" th:href="@{/categorias}">Categorias</a>
+    <a class="botao" th:href="@{/categorias/novo}">Cadastrar Categoria</a>
+</nav>
+
+<main>
+
+<h1>Cadastrar Categoria</h1>
+
+<form th:object="${categoria}"
+      action="/categorias"
+      method="post">
+
+    <label for="nome">Nome:</label>
+    <input type="text" th:field="*{nome}" />
+
+    <button type="submit">Cadastrar</button>
+    <a class="botao secundario" th:href="@{/categorias}">Voltar</a>
+
+</form>
+
+</main>
+
+</body>
+</html>

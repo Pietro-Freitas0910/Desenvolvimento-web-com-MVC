@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+
+    <title>Categorias</title>
+</head>
+<body>
+
+<nav>
+    <a class="botao secundario" th:href="@{/livros}">Livros</a>
+    <a class="botao" th:href="@{/livros/novo}">Cadastrar Livro</a>
+    <a class="botao secundario" th:href="@{/autores}">Autores</a>
+    <a class="botao" th:href="@{/autores/novo}">Cadastrar Autor</a>
+    <a class="botao secundario" th:href="@{/categorias}">Categorias</a>
+    <a class="botao" th:href="@{/categorias/novo}">Cadastrar Categoria</a>
+</nav>
+
+<main>
+
+<h1>Categorias</h1>
+
+<p th:if="${categorias.isEmpty()}">Nenhuma categoria cadastrada.</p>
+
+<p th:unless="${categorias.isEmpty()}">
+    Total de categorias: <strong th:text="${categorias.size()}">0</strong>
+</p>
+
+<table th:unless="${categorias.isEmpty()}">
+    <thead>
+    <tr>
+        <th>Nome</th>
+        <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="categoria : ${categorias}">
+        <td th:text="${categoria.nome}"></td>
+        <td>
+            <a class="botao perigo"
+               th:href="@{/categorias/excluir/{id}(id=${categoria.id})}">Excluir</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</main>
+
+</body>
+</html>

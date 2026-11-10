@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+
+    <title>Autores</title>
+</head>
+<body>
+
+<nav>
+    <a class="botao secundario" th:href="@{/livros}">Livros</a>
+    <a class="botao" th:href="@{/livros/novo}">Cadastrar Livro</a>
+    <a class="botao secundario" th:href="@{/autores}">Autores</a>
+    <a class="botao" th:href="@{/autores/novo}">Cadastrar Autor</a>
+    <a class="botao secundario" th:href="@{/categorias}">Categorias</a>
+    <a class="botao" th:href="@{/categorias/novo}">Cadastrar Categoria</a>
+</nav>
+
+<main>
+
+<h1>Autores</h1>
+
+<p th:if="${autores.isEmpty()}">Nenhum autor cadastrado.</p>
+
+<p th:unless="${autores.isEmpty()}">
+    Total de autores: <strong th:text="${autores.size()}">0</strong>
+</p>
+
+<table th:unless="${autores.isEmpty()}">
+    <thead>
+    <tr>
+        <th>Nome</th>
+        <th>Nacionalidade</th>
+        <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="autor : ${autores}">
+        <td th:text="${autor.nome}"></td>
+        <td th:text="${autor.nacionalidade}"></td>
+        <td>
+            <a class="botao perigo"
+               th:href="@{/autores/excluir/{id}(id=${autor.id})}">Excluir</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</main>
+
+</body>
+</html>

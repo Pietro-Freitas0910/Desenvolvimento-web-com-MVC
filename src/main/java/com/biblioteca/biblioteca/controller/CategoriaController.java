@@ -1,0 +1,52 @@
+package com.biblioteca.biblioteca.controller;
+
+import com.biblioteca.biblioteca.model.Categoria;
+import com.biblioteca.biblioteca.repository.CategoriaRepository;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
+
+@Controller
+public class CategoriaController {
+
+    private final CategoriaRepository repository;
+
+    public CategoriaController(CategoriaRepository repository) {
+        this.repository = repository;
+    }
+
+    @GetMapping("/categorias")
+    public String listarCategorias(Model model) {
+
+        List<Categoria> categorias = repository.findAll();
+        model.addAttribute("categorias", categorias);
+        return "categorias/lista";
+    }
+
+    @GetMapping("/categorias/novo")
+    public String novaCategoria(Model model) {
+
+        model.addAttribute("categoria", new Categoria());
+        return "categorias/form";
+    }
+
+    @PostMapping("/categorias")
+    public String cadastrarCategoria(
+            @ModelAttribute Categoria categoria) {
+
+        repository.save(categoria);
+        return "redirect:/categorias";
+    }
+
+    @GetMapping("/categorias/excluir/{id}")
+    public String excluir(@PathVariable Long id) {
+
+        repository.deleteById(id);
+        return "redirect:/categorias";
+    }
+}
